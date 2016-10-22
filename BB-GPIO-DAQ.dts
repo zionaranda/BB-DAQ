@@ -1,0 +1,69 @@
+/*
+ *
+ * Virtual cape for Data Acquisition System, University of Delaware Senior Design Team 128 (Dolphin)
+ * Author: Zion Aranda
+ *
+ * Source: Molloy, D. [DerekMolloyDCU]. (2012, May, 3). Beaglebone: GPIO Programming on ARM Embedded Linux [Video file]. Retrieved from http://www.youtube.com/watch?v=SaIpz0
+ *
+ */
+/dts-v1/;
+/plugin/;
+ 
+/ {
+   	compatible = "ti,beaglebone", "ti,beaglebone-black";
+ 
+        /* identification */
+        part-number = "BB-GPIO-DAQ";
+        version = "00A0";
+ 
+        fragment@0 {
+                target = <&am33xx_pinmux>;
+                __overlay__ {
+                        pinctrl: BB_GPIO_DAQ_Pins {
+                                pinctrl-single,pins = <
+                                        0x184 0x20 /* P9.24 uart1_txd.uart1_txd MODE0 OUTPUT (TX) */
+                                        0x180 0x20 /* P9.26 uart1_rxd.uart1_rxd MODE0 INPUT (RX) */
+
+                                        /*ADC Pinout*/
+                                        0x000 0x17 /* P8.25 MODE7 OUTPUT pullup- Active-Low Read Input*/
+                                        0x07c 0x17 /* P8.26 MODE7 OUTPUT pullup- Active-Low Chip-Select Input*/
+                                        0x0e0 0x17 /* P8.27 MODE7 OUTPUT pullup- Active-Low Write Input*/
+                                        0x0e8 0x07 /* P8.28 MODE7 OUTPUT pulldown- Shutdown Input*/
+                                        0x0e4 0x07 /* P8.29 MODE7 OUTPUT pulldown- Convert Start Input*/
+                                        0x0ec 0x37 /* P8.30 MODE7 INPUT pullup- Active-Low, End-of-Conversion Output*/
+                                        0x0d8 0x27 /* P8.31 MODE7 INPUT pulldown- DB15*/
+                                        0x0dc 0x27 /* P8.32 MODE7 INPUT pulldown- DB14*/
+                                        0x0d4 0x27 /* P8.33 MODE7 INPUT pulldown- DB13*/
+                                        0x0cc 0x27 /* P8.34 MODE7 INPUT pulldown- DB12*/
+                                        0x0d0 0x27 /* P8.35 MODE7 INPUT pulldown- DB11*/
+                                        0x0c8 0x27 /* P8.36 MODE7 INPUT pulldown- DB10*/
+                                        0x0c0 0x27 /* P8.37 MODE7 INPUT pulldown- DB9*/
+                                        0x0c4 0x27 /* P8.38 MODE7 INPUT pulldown- DB8*/
+                                        0x0b8 0x27 /* P8.39 MODE7 INPUT pulldown- DB7*/
+                                        0x0bc 0x27 /* P8.40 MODE7 INPUT pulldown- DB6*/
+                                        0x0b0 0x27 /* P8.41 MODE7 INPUT pulldown- DB5*/
+                                        0x0b4 0x27 /* P8.42 MODE7 INPUT pulldown- DB4*/
+                                        0x0a8 0x27 /* P8.43 MODE7 INPUT pulldown- DB3/Configuration Register Bit 3*/
+                                        0x0ac 0x27 /* P8.44 MODE7 INPUT pulldown- DB2/Configuration Register Bit 2*/
+                                        0x0a0 0x27 /* P8.45 MODE7 INPUT pulldown- DB1/Configuration Register Bit 1*/
+                                        0x0a4 0x27 /* P8.46 MODE7 INPUT pulldown- DB0/Configuration Register Bit 0*/
+
+                                        /*LPF Pinout*/
+
+                                        /*SDcard Pinout*/
+
+                                        /*Timers*/   
+                                >;
+                        };
+                };
+        };
+ 
+	fragment@1 {
+                target = <&ocp>;
+                __overlay__ {
+                        status = "okay";
+                        pinctrl-names = "default";
+                        pinctrl-0 = <&pinctrl>;
+                };
+        };
+};
