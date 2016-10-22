@@ -61,9 +61,11 @@
 	fragment@1 {
                 target = <&ocp>;
                 __overlay__ {
+			helper : helper{
                         status = "okay";
                         pinctrl-names = "default";
                         pinctrl-0 = <&pinctrl>;
+			};
                 };
         };
 };
