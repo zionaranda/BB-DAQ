@@ -22,7 +22,7 @@
                         pinctrl: BB_GPIO_DAQ_Pins {
                                 pinctrl-single,pins = <
                                         /*ADC Pinout*/
-                                        0x000 0x17 /* P8.25 MODE7 OUTPUT pullup- Active-Low Read Input*/
+                                        /* P8.25 MODE7 OUTPUT pullup- Active-Low Read Input*/
                                         0x07c 0x17 /* P8.26 MODE7 OUTPUT pullup- Active-Low Chip-Select Input*/
                                         0x0e0 0x17 /* P8.27 MODE7 OUTPUT pullup- Active-Low Write Input*/
                                         0x0e8 0x07 /* P8.28 MODE7 OUTPUT pulldown- Shutdown Input*/
@@ -58,11 +58,12 @@
 	fragment@1 {
                 target = <&ocp>;
                 __overlay__ {
-			//helper : helper{
+			gpio_helper {
+			compatible = "gpio-of-helper";
                         status = "okay";
                         pinctrl-names = "default";
                         pinctrl-0 = <&pinctrl>;
-			//};
+			};
                 };
         };
 };
